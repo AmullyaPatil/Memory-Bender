@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Memory Bender Design System - Magical, emotional, nostalgic journaling theme
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Memory Bender Color Palette */
+    --background: 33 50% 98%; /* #FFF9F4 warm ivory */
+    --foreground: 0 0% 24%; /* #3E3E3E gentle dark gray */
+
+    --card: 33 50% 98%; /* warm ivory cards */
+    --card-foreground: 0 0% 24%;
+
+    --popover: 33 50% 98%;
+    --popover-foreground: 0 0% 24%;
+
+    --primary: 352 73% 85%; /* #FFB6B9 soft blush pink */
+    --primary-foreground: 0 0% 24%;
+
+    --secondary: 197 76% 78%; /* #A0D8EF gentle sky blue */
+    --secondary-foreground: 0 0% 24%;
+
+    --muted: 33 50% 95%; /* lighter warm ivory */
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 36 100% 85%; /* #FFDEB4 pale apricot */
+    --accent-foreground: 0 0% 24%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 33 50% 98%;
+
+    --border: 33 30% 90%;
+    --input: 33 30% 90%;
+    --ring: 352 73% 75%;
+
+    /* Memory Bender Custom Tokens */
+    --memory-glow: 352 73% 85%;
+    --memory-sparkle: 45 100% 80%;
+    --memory-shadow: 0 0% 0%;
+    
+    /* Magical Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(33 50% 98%), hsl(352 73% 95%), hsl(197 76% 90%));
+    --gradient-memory: linear-gradient(145deg, hsl(352 73% 85%), hsl(36 100% 85%));
+    --gradient-time: linear-gradient(180deg, hsl(197 76% 78%), hsl(352 73% 85%));
+    
+    /* Magical Shadows */
+    --shadow-memory: 0 8px 32px hsl(352 73% 85% / 0.3);
+    --shadow-glow: 0 0 20px hsl(352 73% 85% / 0.4);
+    --shadow-soft: 0 4px 16px hsl(0 0% 0% / 0.1);
+    
+    /* Transitions */
+    --transition-magical: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark Mode - Night journaling theme */
+    --background: 0 0% 18%; /* #2D2D2D */
+    --foreground: 33 50% 95%;
+
+    --card: 0 0% 22%;
+    --card-foreground: 33 50% 95%;
+
+    --popover: 0 0% 22%;
+    --popover-foreground: 33 50% 95%;
+
+    --primary: 352 73% 75%; /* softer pink in dark */
+    --primary-foreground: 0 0% 18%;
+
+    --secondary: 197 60% 65%; /* muted sky blue */
+    --secondary-foreground: 33 50% 95%;
+
+    --muted: 0 0% 25%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 36 80% 75%; /* muted apricot */
+    --accent-foreground: 0 0% 18%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 33 50% 95%;
+
+    --border: 0 0% 30%;
+    --input: 0 0% 30%;
+    --ring: 352 73% 65%;
+
+    /* Dark mode magical elements */
+    --memory-glow: 352 73% 65%;
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 18%), hsl(352 73% 25%), hsl(197 60% 25%));
+    --gradient-memory: linear-gradient(145deg, hsl(352 73% 65%), hsl(36 80% 65%));
+    --shadow-memory: 0 8px 32px hsl(352 73% 25% / 0.5);
+    --shadow-glow: 0 0 20px hsl(352 73% 65% / 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Typography families */
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Magical animations */
+  @keyframes sparkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: var(--shadow-soft); }
+    50% { box-shadow: var(--shadow-glow); }
+  }
+
+  .sparkle-animation {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  .memory-gradient {
+    background: var(--gradient-memory);
+  }
+
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  .magical-shadow {
+    box-shadow: var(--shadow-memory);
+  }
+}
