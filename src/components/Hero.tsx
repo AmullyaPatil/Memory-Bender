@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-hourglass.jpg";
 
 const Hero = () => {
+  const navigate = useNavigate();
+  
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-hero relative overflow-hidden">
       {/* Floating sparkles */}
@@ -43,9 +46,9 @@ const Hero = () => {
             {/* Call to Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button 
-                variant="hero" 
+                onClick={() => navigate('/auth')}
                 size="lg"
-                className="group transform hover:scale-110 transition-all duration-300"
+                className="memory-gradient text-foreground hover:shadow-glow group transform hover:scale-110 transition-all duration-300"
               >
                 <span className="mr-2">✨</span>
                 Start Remembering
@@ -54,6 +57,7 @@ const Hero = () => {
               <Button 
                 variant="outline" 
                 size="lg"
+                onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
                 className="hover:bg-primary/10 hover:border-primary/40"
               >
                 Learn More
