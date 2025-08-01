@@ -6,7 +6,10 @@ const Hero = () => {
   const navigate = useNavigate();
   
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-hero relative overflow-hidden">
+    <section 
+      className="min-h-screen flex items-center justify-center hero-gradient relative overflow-hidden"
+      style={{ paddingTop: '4rem' }}
+    >
       {/* Floating sparkles */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-20 w-2 h-2 bg-memory-sparkle rounded-full sparkle-animation" style={{ animationDelay: '0s' }} />
