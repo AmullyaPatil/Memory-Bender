@@ -6,9 +6,9 @@ import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Badge } from '@/components/ui/badge'
 import { useToast } from '@/hooks/use-toast'
-import { CalendarDays, Plus, Search, LogOut } from 'lucide-react'
+import { CalendarDays, Plus, Search, LogOut, User, Home } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import Header from '@/components/Header'
+
 
 interface Memory {
   id: string
@@ -27,6 +27,7 @@ const Dashboard = () => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
   const [loading, setLoading] = useState(true)
+  const [profile, setProfile] = useState<any>(null)
 
   const moodColors = {
     Happy: 'bg-primary/10 text-primary border-primary/20',
@@ -51,6 +52,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (user) {
       fetchMemories()
+      fetchProfile()
     }
   }, [user, selectedYear])
 
@@ -76,6 +78,20 @@ const Dashboard = () => {
       setMemories(data || [])
     }
     setLoading(false)
+  }
+
+  const fetchProfile = async () => {
+    if (!user) return
+
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
+      .single()
+
+    if (data) {
+      setProfile(data)
+    }
   }
 
   const handleSignOut = async () => {
@@ -104,7 +120,46 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen hero-gradient">
-      <Header />
+      {/* Dashboard Header */}
+      <header className="border-b border-border/20 bg-card/80 backdrop-blur-sm magical-shadow">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-full memory-gradient float-animation">
+                <CalendarDays className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <div>
+                <h1 className="font-display text-3xl text-primary glow-pulse">Memory Bender</h1>
+                <p className="text-sm text-muted-foreground">
+                  Welcome back, {profile?.display_name || profile?.first_name || user?.email}
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <Button onClick={() => navigate('/')} variant="outline" className="magical-shadow">
+                <Home className="h-4 w-4 mr-2" />
+                Home
+              </Button>
+              <Button onClick={() => navigate('/add-memory')} className="memory-gradient hover-scale">
+                <Plus className="h-4 w-4 mr-2" />
+                Add Memory
+              </Button>
+              <Button onClick={() => navigate('/timeline')} variant="outline" className="magical-shadow">
+                Timeline
+              </Button>
+              <Button onClick={() => navigate('/search')} variant="outline" size="sm" className="magical-shadow">
+                <Search className="h-4 w-4" />
+              </Button>
+              <Button onClick={() => navigate('/profile')} variant="outline" size="sm" className="magical-shadow">
+                <User className="h-4 w-4" />
+              </Button>
+              <Button onClick={handleSignOut} variant="outline" size="sm" className="magical-shadow">
+                <LogOut className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </header>
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
