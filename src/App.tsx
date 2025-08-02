@@ -12,6 +12,7 @@ import ViewMemory from "./pages/ViewMemory";
 import EditMemory from "./pages/EditMemory";
 import Search from "./pages/Search";
 import Timeline from "./pages/Timeline";
+import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -30,8 +31,8 @@ const AppContent = () => {
 
   return (
     <Routes>
-      <Route path="/" element={user ? <Navigate to="/dashboard" replace /> : <Index />} />
-      <Route path="/auth" element={user ? <Navigate to="/dashboard" replace /> : <Auth />} />
+      <Route path="/" element={<Index />} />
+      <Route path="/auth" element={user ? <Navigate to="/" replace /> : <Auth />} />
       <Route path="/dashboard" element={
         <ProtectedRoute>
           <Dashboard />
@@ -60,6 +61,11 @@ const AppContent = () => {
       <Route path="/timeline" element={
         <ProtectedRoute>
           <Timeline />
+        </ProtectedRoute>
+      } />
+      <Route path="/profile" element={
+        <ProtectedRoute>
+          <Profile />
         </ProtectedRoute>
       } />
       <Route path="*" element={<NotFound />} />
