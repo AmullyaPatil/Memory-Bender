@@ -62,9 +62,9 @@ const Auth = () => {
   return (
     <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
       <Card className="w-full max-w-md magical-shadow">
-        <CardHeader className="text-center">
-          <CardTitle className="font-display text-3xl text-primary">Memory Bender</CardTitle>
-          <CardDescription>
+        <CardHeader className="text-center pb-4 lg:pb-6">
+          <CardTitle className="font-display text-2xl lg:text-3xl text-primary">Memory Bender</CardTitle>
+          <CardDescription className="text-sm lg:text-base">
             Your personal time machine for memories
           </CardDescription>
         </CardHeader>
@@ -76,32 +76,34 @@ const Auth = () => {
             </TabsList>
             
             <TabsContent value="signin">
-              <form onSubmit={handleSignIn} className="space-y-4">
+              <form onSubmit={handleSignIn} className="space-y-4 mt-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email" className="text-sm lg:text-base">Email</Label>
                   <Input
                     id="email"
                     type="email"
                     placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="h-10 lg:h-11 text-sm lg:text-base"
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password" className="text-sm lg:text-base">Password</Label>
                   <Input
                     id="password"
                     type="password"
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className="h-10 lg:h-11 text-sm lg:text-base"
                     required
                   />
                 </div>
                 <Button 
                   type="submit" 
-                  className="w-full" 
+                  className="w-full h-10 lg:h-11 text-sm lg:text-base" 
                   disabled={loading}
                 >
                   {loading ? 'Signing In...' : 'Sign In'}
@@ -110,32 +112,34 @@ const Auth = () => {
             </TabsContent>
             
             <TabsContent value="signup">
-              <form onSubmit={handleSignUp} className="space-y-4">
+              <form onSubmit={handleSignUp} className="space-y-4 mt-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
+                  <Label htmlFor="signup-email" className="text-sm lg:text-base">Email</Label>
                   <Input
                     id="signup-email"
                     type="email"
                     placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="h-10 lg:h-11 text-sm lg:text-base"
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password</Label>
+                  <Label htmlFor="signup-password" className="text-sm lg:text-base">Password</Label>
                   <Input
                     id="signup-password"
                     type="password"
                     placeholder="Create a password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className="h-10 lg:h-11 text-sm lg:text-base"
                     required
                   />
                 </div>
                 <Button 
                   type="submit" 
-                  className="w-full" 
+                  className="w-full h-10 lg:h-11 text-sm lg:text-base" 
                   disabled={loading}
                 >
                   {loading ? 'Creating Account...' : 'Create Account'}

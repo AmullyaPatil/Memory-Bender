@@ -155,80 +155,84 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen hero-gradient">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-4 lg:py-8">
         <Button 
           variant="ghost" 
           onClick={() => navigate('/dashboard')} 
-          className="mb-6 hover-scale"
+          className="mb-4 lg:mb-6 hover-scale"
+          size="sm"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Dashboard
         </Button>
 
-        <div className="max-w-2xl mx-auto space-y-6">
+        <div className="max-w-2xl mx-auto space-y-4 lg:space-y-6">
           {/* Profile Header */}
           <Card className="magical-shadow memory-card bg-card/90 backdrop-blur-sm">
-            <CardHeader className="text-center pb-6">
-              <div className="flex justify-center mb-4">
-                <Avatar className="h-24 w-24">
+            <CardHeader className="text-center pb-4 lg:pb-6">
+              <div className="flex justify-center mb-3 lg:mb-4">
+                <Avatar className="h-20 w-20 lg:h-24 lg:w-24">
                   <AvatarImage src={profile?.avatar_url || ''} />
-                  <AvatarFallback className="text-2xl bg-primary/10">
+                  <AvatarFallback className="text-xl lg:text-2xl bg-primary/10">
                     {(profile?.display_name || user?.email || 'U').charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
               </div>
-              <CardTitle className="font-display text-2xl text-primary">
+              <CardTitle className="font-display text-xl lg:text-2xl text-primary">
                 {profile?.display_name || 'Your Profile'}
               </CardTitle>
-              <CardDescription>{user?.email}</CardDescription>
+              <CardDescription className="text-sm lg:text-base truncate max-w-64 lg:max-w-none mx-auto">{user?.email}</CardDescription>
             </CardHeader>
           </Card>
 
           {/* Profile Information */}
           <Card className="magical-shadow memory-card bg-card/90 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <User className="h-5 w-5" />
+            <CardHeader className="pb-4 lg:pb-6">
+              <CardTitle className="flex items-center gap-2 text-lg lg:text-xl">
+                <User className="h-4 w-4 lg:h-5 lg:w-5" />
                 Profile Information
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-sm lg:text-base">
                 Update your personal information and preferences.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="first_name">First Name</Label>
+                  <Label htmlFor="first_name" className="text-sm lg:text-base">First Name</Label>
                   <Input
                     id="first_name"
                     value={formData.first_name}
                     onChange={(e) => setFormData(prev => ({ ...prev, first_name: e.target.value }))}
                     placeholder="Enter your first name"
+                    className="h-10 lg:h-11 text-sm lg:text-base"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="last_name">Last Name</Label>
+                  <Label htmlFor="last_name" className="text-sm lg:text-base">Last Name</Label>
                   <Input
                     id="last_name"
                     value={formData.last_name}
                     onChange={(e) => setFormData(prev => ({ ...prev, last_name: e.target.value }))}
                     placeholder="Enter your last name"
+                    className="h-10 lg:h-11 text-sm lg:text-base"
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="display_name">Display Name</Label>
+                <Label htmlFor="display_name" className="text-sm lg:text-base">Display Name</Label>
                 <Input
                   id="display_name"
                   value={formData.display_name}
                   onChange={(e) => setFormData(prev => ({ ...prev, display_name: e.target.value }))}
                   placeholder="How you'd like to be addressed"
+                  className="h-10 lg:h-11 text-sm lg:text-base"
                 />
               </div>
               <Button 
                 onClick={updateProfile} 
                 disabled={updating}
-                className="memory-gradient hover-scale"
+                className="memory-gradient hover-scale w-full sm:w-auto text-sm lg:text-base"
               >
                 {updating ? 'Updating...' : 'Update Profile'}
               </Button>
@@ -237,41 +241,43 @@ const Profile = () => {
 
           {/* Password Change */}
           <Card className="magical-shadow memory-card bg-card/90 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Lock className="h-5 w-5" />
+            <CardHeader className="pb-4 lg:pb-6">
+              <CardTitle className="flex items-center gap-2 text-lg lg:text-xl">
+                <Lock className="h-4 w-4 lg:h-5 lg:w-5" />
                 Change Password
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-sm lg:text-base">
                 Update your password to keep your account secure.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="new_password">New Password</Label>
+                <Label htmlFor="new_password" className="text-sm lg:text-base">New Password</Label>
                 <Input
                   id="new_password"
                   type="password"
                   value={formData.new_password}
                   onChange={(e) => setFormData(prev => ({ ...prev, new_password: e.target.value }))}
                   placeholder="Enter new password"
+                  className="h-10 lg:h-11 text-sm lg:text-base"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="confirm_password">Confirm New Password</Label>
+                <Label htmlFor="confirm_password" className="text-sm lg:text-base">Confirm New Password</Label>
                 <Input
                   id="confirm_password"
                   type="password"
                   value={formData.confirm_password}
                   onChange={(e) => setFormData(prev => ({ ...prev, confirm_password: e.target.value }))}
                   placeholder="Confirm new password"
+                  className="h-10 lg:h-11 text-sm lg:text-base"
                 />
               </div>
               <Button 
                 onClick={updatePassword} 
                 disabled={updating}
                 variant="outline"
-                className="magical-shadow hover-scale"
+                className="magical-shadow hover-scale w-full sm:w-auto text-sm lg:text-base"
               >
                 {updating ? 'Updating...' : 'Update Password'}
               </Button>

@@ -41,28 +41,28 @@ const Features = () => {
   ];
 
   return (
-    <section id="features" className="py-24 bg-background relative overflow-hidden">
+    <section id="features" className="py-16 sm:py-20 lg:py-24 bg-background relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-br from-secondary/10 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-20 left-4 lg:left-20 w-24 h-24 lg:w-32 lg:h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-2xl lg:blur-3xl" />
+        <div className="absolute bottom-20 right-4 lg:right-20 w-32 h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-secondary/10 to-transparent rounded-full blur-2xl lg:blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in-up">
-          <h2 className="font-display text-4xl lg:text-5xl font-bold text-foreground mb-6">
+        <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16 animate-fade-in-up">
+          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-foreground mb-4 lg:mb-6">
             Features that make
             <span className="text-primary block lg:inline"> memories magical</span>
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed px-4 sm:px-0">
             Every feature is designed to help you connect with your past self and 
             understand the beautiful tapestry of your emotional journey.
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <Card 
               key={index}

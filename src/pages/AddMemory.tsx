@@ -123,21 +123,22 @@ const AddMemory = () => {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-4 py-3 lg:py-4">
           <Button 
             variant="ghost" 
             onClick={() => navigate('/dashboard')}
             className="mb-2"
+            size="sm"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Dashboard
           </Button>
-          <h1 className="font-display text-2xl text-primary">Add New Memory</h1>
-          <p className="text-sm text-muted-foreground">Capture a moment from your past</p>
+          <h1 className="font-display text-xl lg:text-2xl text-primary">Add New Memory</h1>
+          <p className="text-xs lg:text-sm text-muted-foreground">Capture a moment from your past</p>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-4 lg:py-8">
         <div className="max-w-2xl mx-auto">
           <Card className="magical-shadow">
             <CardHeader>
@@ -147,21 +148,23 @@ const AddMemory = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4 lg:space-y-6">
                 {/* Date Selection */}
                 <div className="space-y-2">
-                  <Label>Memory Date *</Label>
+                  <Label className="text-sm lg:text-base">Memory Date *</Label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
                         className={cn(
-                          "w-full justify-start text-left font-normal",
+                          "w-full justify-start text-left font-normal h-10 lg:h-11",
                           !memoryDate && "text-muted-foreground"
                         )}
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        {memoryDate ? format(memoryDate, "PPP") : "Select a date from the past"}
+                        <span className="text-sm lg:text-base">
+                          {memoryDate ? format(memoryDate, "PPP") : "Select a date from the past"}
+                        </span>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
@@ -179,30 +182,30 @@ const AddMemory = () => {
 
                 {/* Memory Text */}
                 <div className="space-y-2">
-                  <Label htmlFor="memory-text">Memory *</Label>
+                  <Label htmlFor="memory-text" className="text-sm lg:text-base">Memory *</Label>
                   <Textarea
                     id="memory-text"
                     placeholder="What happened on this day? Share your memory..."
                     value={memoryText}
                     onChange={(e) => setMemoryText(e.target.value)}
-                    className="min-h-[120px]"
+                    className="min-h-[100px] lg:min-h-[120px] text-sm lg:text-base"
                     required
                   />
                 </div>
 
                 {/* Mood Selection */}
                 <div className="space-y-2">
-                  <Label>Mood *</Label>
+                  <Label className="text-sm lg:text-base">Mood *</Label>
                   <Select value={mood} onValueChange={setMood} required>
-                    <SelectTrigger>
+                    <SelectTrigger className="h-10 lg:h-11">
                       <SelectValue placeholder="How were you feeling?" />
                     </SelectTrigger>
                     <SelectContent>
                       {moods.map((moodOption) => (
                         <SelectItem key={moodOption.value} value={moodOption.value}>
                           <span className="flex items-center gap-2">
-                            <span className="text-lg">{moodOption.emoji}</span>
-                            <span className={moodOption.color}>{moodOption.value}</span>
+                            <span className="text-base lg:text-lg">{moodOption.emoji}</span>
+                            <span className={`${moodOption.color} text-sm lg:text-base`}>{moodOption.value}</span>
                           </span>
                         </SelectItem>
                       ))}
@@ -212,19 +215,19 @@ const AddMemory = () => {
 
                 {/* Image Upload */}
                 <div className="space-y-2">
-                  <Label htmlFor="image-upload">Memory Photo (optional)</Label>
-                  <div className="flex items-center gap-4">
+                  <Label htmlFor="image-upload" className="text-sm lg:text-base">Memory Photo (optional)</Label>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
                     <Input
                       id="image-upload"
                       type="file"
                       accept="image/*"
                       onChange={handleImageUpload}
-                      className="flex-1"
+                      className="flex-1 text-sm lg:text-base"
                     />
                     {imageFile && (
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Upload className="h-4 w-4" />
-                        {imageFile.name}
+                      <div className="flex items-center gap-2 text-xs lg:text-sm text-muted-foreground">
+                        <Upload className="h-3 w-3 lg:h-4 lg:w-4" />
+                        <span className="truncate max-w-32 lg:max-w-none">{imageFile.name}</span>
                       </div>
                     )}
                   </div>
@@ -232,34 +235,34 @@ const AddMemory = () => {
 
                 {/* Dear Past Me */}
                 <div className="space-y-2">
-                  <Label htmlFor="dear-past-me">Dear Past Me (optional)</Label>
+                  <Label htmlFor="dear-past-me" className="text-sm lg:text-base">Dear Past Me (optional)</Label>
                   <Textarea
                     id="dear-past-me"
                     placeholder="What would you tell your past self about this moment?"
                     value={dearPastMe}
                     onChange={(e) => setDearPastMe(e.target.value)}
-                    className="min-h-[100px]"
+                    className="min-h-[80px] lg:min-h-[100px] text-sm lg:text-base"
                   />
                   <p className="text-xs text-muted-foreground">
                     A message to your past self - advice, comfort, or reflection
                   </p>
                 </div>
 
-                <div className="flex gap-4 pt-4">
+                <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-4">
                   <Button
                     type="button"
                     variant="outline"
                     onClick={() => navigate('/dashboard')}
-                    className="flex-1"
+                    className="flex-1 text-sm lg:text-base"
                   >
                     Cancel
                   </Button>
                   <Button 
                     type="submit" 
                     disabled={loading || !memoryDate || !memoryText || !mood}
-                    className="flex-1"
+                    className="flex-1 text-sm lg:text-base"
                   >
-                    {loading ? 'Saving Memory...' : 'Save Memory'}
+                    {loading ? 'Saving...' : 'Save Memory'}
                   </Button>
                 </div>
               </form>
