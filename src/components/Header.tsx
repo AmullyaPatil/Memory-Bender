@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { CalendarDays, Sparkles, User, Menu } from "lucide-react";
+import { Sparkles, User, Menu } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import logoImage from "@/assets/memory-bender-logo.png";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -33,8 +34,12 @@ const Header = () => {
             className="flex items-center gap-3 cursor-pointer hover-scale"
             onClick={() => navigate('/')}
           >
-            <div className="p-2 rounded-full memory-gradient float-animation">
-              <CalendarDays className="h-5 w-5 text-primary-foreground" />
+            <div className="w-10 h-10 rounded-full overflow-hidden" style={{ animation: 'float 8s ease-in-out infinite' }}>
+              <img 
+                src={logoImage} 
+                alt="Memory Bender Logo" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
               <h1 className="font-display text-xl font-bold text-primary">Memory Bender</h1>

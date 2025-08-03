@@ -122,20 +122,22 @@ const Dashboard = () => {
     <div className="min-h-screen hero-gradient">
       {/* Dashboard Header */}
       <header className="border-b border-border/20 bg-card/80 backdrop-blur-sm magical-shadow">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-4">
-              <div className="p-3 rounded-full memory-gradient float-animation">
-                <CalendarDays className="h-6 w-6 text-primary-foreground" />
+        <div className="container mx-auto px-4 py-4 md:py-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 md:p-3 rounded-full memory-gradient" style={{ animation: 'float 8s ease-in-out infinite' }}>
+                  <CalendarDays className="h-5 w-5 md:h-6 md:w-6 text-primary-foreground" />
+                </div>
+                <div>
+                  <h1 className="font-display text-xl md:text-3xl text-primary glow-pulse">Memory Bender</h1>
+                  <p className="text-xs md:text-sm text-muted-foreground truncate max-w-48 md:max-w-none">
+                    Welcome back, {profile?.display_name || profile?.first_name || user?.email}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h1 className="font-display text-3xl text-primary glow-pulse">Memory Bender</h1>
-                <p className="text-sm text-muted-foreground">
-                  Welcome back, {profile?.display_name || profile?.first_name || user?.email}
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-3">
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex gap-3">
               <Button onClick={() => navigate('/')} variant="outline" className="magical-shadow">
                 <Home className="h-4 w-4 mr-2" />
                 Home
@@ -157,19 +159,48 @@ const Dashboard = () => {
                 <LogOut className="h-4 w-4" />
               </Button>
             </div>
+
+            {/* Mobile Navigation */}
+            <div className="flex md:hidden w-full justify-between gap-2">
+              <div className="grid grid-cols-4 gap-2 flex-1">
+                <Button onClick={() => navigate('/')} variant="outline" size="sm" className="magical-shadow text-xs h-8">
+                  <Home className="h-3 w-3 mr-1" />
+                  Home
+                </Button>
+                <Button onClick={() => navigate('/add-memory')} className="memory-gradient text-xs h-8">
+                  <Plus className="h-3 w-3 mr-1" />
+                  Add
+                </Button>
+                <Button onClick={() => navigate('/search')} variant="outline" size="sm" className="magical-shadow text-xs h-8">
+                  <Search className="h-3 w-3 mr-1" />
+                  Search
+                </Button>
+                <Button onClick={() => navigate('/timeline')} variant="outline" size="sm" className="magical-shadow text-xs h-8">
+                  Timeline
+                </Button>
+              </div>
+              <div className="flex gap-1">
+                <Button onClick={() => navigate('/profile')} variant="outline" size="sm" className="magical-shadow">
+                  <User className="h-3 w-3" />
+                </Button>
+                <Button onClick={handleSignOut} variant="outline" size="sm" className="magical-shadow">
+                  <LogOut className="h-3 w-3" />
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 py-6 md:py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
           {/* Enhanced Calendar */}
-          <div className="xl:col-span-2">
+          <div className="md:col-span-2 xl:col-span-2">
             <Card className="magical-shadow memory-card bg-card/90 backdrop-blur-sm">
               <CardHeader className="pb-4">
                 <div className="flex justify-between items-center">
                   <CardTitle className="flex items-center gap-3 font-display text-xl">
-                    <div className="p-2 rounded-lg memory-gradient sparkle-animation">
+                    <div className="p-2 rounded-lg memory-gradient" style={{ animation: 'sparkle 8s ease-in-out infinite' }}>
                       <CalendarDays className="h-5 w-5 text-primary-foreground" />
                     </div>
                     Memory Calendar
@@ -218,12 +249,12 @@ const Dashboard = () => {
           </div>
 
           {/* Middle Section - Quick Actions & Recent Activity */}
-          <div className="space-y-6">
+          <div className="space-y-4 md:space-y-6">
             {/* Quick Actions */}
             <Card className="magical-shadow memory-card bg-card/90 backdrop-blur-sm">
               <CardHeader className="pb-4">
                 <CardTitle className="font-display text-lg flex items-center gap-2">
-                  <div className="p-2 rounded-lg memory-gradient sparkle-animation">
+                  <div className="p-2 rounded-lg memory-gradient" style={{ animation: 'sparkle 8s ease-in-out infinite' }}>
                     ⚡
                   </div>
                   Quick Actions
@@ -262,7 +293,7 @@ const Dashboard = () => {
             <Card className="magical-shadow memory-card bg-card/90 backdrop-blur-sm">
               <CardHeader className="pb-4">
                 <CardTitle className="font-display text-lg flex items-center gap-2">
-                  <div className="p-2 rounded-lg memory-gradient sparkle-animation">
+                  <div className="p-2 rounded-lg memory-gradient" style={{ animation: 'sparkle 8s ease-in-out infinite' }}>
                     🕒
                   </div>
                   Recent Memories
@@ -298,7 +329,7 @@ const Dashboard = () => {
             <Card className="magical-shadow memory-card bg-card/90 backdrop-blur-sm">
               <CardHeader className="pb-4">
                 <CardTitle className="font-display text-lg flex items-center gap-2">
-                  <div className="p-2 rounded-lg memory-gradient sparkle-animation">
+                  <div className="p-2 rounded-lg memory-gradient" style={{ animation: 'sparkle 8s ease-in-out infinite' }}>
                     🎭
                   </div>
                   Mood Insights
@@ -334,11 +365,11 @@ const Dashboard = () => {
           </div>
 
           {/* Enhanced Selected Date Memories */}
-          <div className="space-y-6">
+          <div className="md:col-span-2 xl:col-span-1 space-y-4 md:space-y-6">
             <Card className="magical-shadow memory-card bg-card/90 backdrop-blur-sm">
               <CardHeader className="pb-4">
                 <CardTitle className="font-display text-lg flex items-center gap-2">
-                  <div className="p-2 rounded-lg memory-gradient sparkle-animation">
+                  <div className="p-2 rounded-lg memory-gradient" style={{ animation: 'sparkle 8s ease-in-out infinite' }}>
                     ✨
                   </div>
                   {selectedDate 
